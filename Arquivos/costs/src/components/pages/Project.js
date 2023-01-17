@@ -6,6 +6,7 @@ import Load from '../layout/Load'
 import Container from '../layout/Container'
 import ProjectForm from '../project/ProjectForm'
 import Message from '../layout/Message'
+import ServiceForm from '../service/ServiceForm'
 
 function Project() {
 
@@ -71,6 +72,12 @@ function Project() {
 
     }
 
+
+function createService(){
+
+    
+}
+
     function toggleProjectForm() {
         setShowProjectForm(!showProjectForm)
     }
@@ -118,7 +125,13 @@ function Project() {
                             </button>
 
                             <div className={styles.project_info}>
-                                {showServiceForm && <div>Form serviço</div>}
+                                {showServiceForm && <ServiceForm
+                                
+                                handleSubmit={createService}
+                                btntext='Adicionar serviço'
+                                projectData={project}
+                                  
+                                />}
                             </div>
                         </div>
 
