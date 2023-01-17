@@ -1,12 +1,11 @@
 {
   "projects": [
     {
-      "0": {},
-      "name": "ufaaaa",
-      "budget": "45878",
+      "name": "gui",
+      "budget": "2500",
       "category": {
-        "id": "3",
-        "name": "Design"
+        "id": "1",
+        "name": "infra"
       },
       "cost": 0,
       "services": [],

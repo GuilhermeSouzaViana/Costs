@@ -17,7 +17,7 @@ const[service,setService]=useState({})
     }
 
     function handleChange(e) {
-        setService({...service,[e.target.name]: e.target.value })
+        setService({...service, [e.target.name]: e.target.value })
 
     }
 
@@ -48,7 +48,7 @@ const[service,setService]=useState({})
             />
             <Submit text={btnText} />
         </form>
-    )
+    )  
 }
 
 export default ServiceForm
