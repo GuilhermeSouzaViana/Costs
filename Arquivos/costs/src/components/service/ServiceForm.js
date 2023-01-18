@@ -4,20 +4,20 @@ import Input from '../form/Input'
 import Submit from '../form/Submit'
 
 
-function ServiceForm({handleSubmit,btnText,projectData}) {
+function ServiceForm({ handleSubmit, btnText, projectData }) {
 
-const[service,setService]=useState({})
+    const [service, setService] = useState({})
 
-    
+
     function submit(e) {
         e.preventDefault()
         projectData.services.push(service)
-        handleSubmit={projectData}
+        handleSubmit(projectData) 
 
     }
 
     function handleChange(e) {
-        setService({...service, [e.target.name]: e.target.value })
+        setService({ ...service, [e.target.name]: e.target.value })
 
     }
 
@@ -48,7 +48,7 @@ const[service,setService]=useState({})
             />
             <Submit text={btnText} />
         </form>
-    )  
+    )
 }
 
 export default ServiceForm

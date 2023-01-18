@@ -1,11 +1,11 @@
 {
   "projects": [
     {
-      "name": "gui",
-      "budget": "2500",
+      "name": "Gui",
+      "budget": "500",
       "category": {
-        "id": "1",
-        "name": "infra"
+        "id": "4",
+        "name": "Planejamento"
       },
       "cost": 0,
       "services": [],

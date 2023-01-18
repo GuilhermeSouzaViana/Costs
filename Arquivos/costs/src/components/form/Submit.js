@@ -1,15 +1,15 @@
 import styles from './Submit.module.css'
 
-function Submit({text}){
+function Submit({ text }) {
 
-return(
-    <div>
+    return (
+        <div>
 
 
-<button className={styles.btn}>{text}</button>
+            <button className={styles.btn}>{text}</button>
 
-    </div>
-)
+        </div>
+    )
 
 }
 
