@@ -83,7 +83,7 @@ function Project() {
         setMessage('')
         //last service
 
-        const lastService = project.service[project.service.lenght - 1]
+        const lastService = project.services[project.services.lenght - 1]
 
 
         lastService.id = uuidv4()
@@ -98,9 +98,9 @@ function Project() {
 
             setMessage('Orçamento ultrapassado ! verique o valor do serviço')
             setType('error')
-            project.service.pop()
+            project.services.pop()
             return false
-
+            
         }
 
 
@@ -112,25 +112,51 @@ function Project() {
 
         fetch(`http://localhost:5000/projects/${project.id}`, {
 
-            method: 'PATH',
+            method: 'PATCH',
             headers: {
 
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(project),
         })
-        .then((resp) => resp.json())
-            .then((data)=> {
+            .then((resp) => resp.json())
+            .then((data) => {
                 setShowServiceForm(false)
             })
             .catch((err) => console.log(err))
+    
+        }
 
-    }
 
 
+    function removeService(id,cost) {
 
-    function removeService(){
+const servicesUpdate= project.services.filter((service) => service.id !==id)
 
+const projectUpdated = project
+
+projectUpdated.services = servicesUpdate
+
+projectUpdated.cost = parseFloat(projectUpdated.cost)- parseFloat(cost)
+
+fetch(`http://localhost:5000/projects/${projectUpdated.id}`,{
+
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(projectUpdated)
+
+
+}).then((resp)=> resp.json())
+.then((data)=>{
+    setProject(projectUpdated)
+    setServices(servicesUpdate)
+    setMessage('Serviço removido !')
+
+
+} )
+.catch(err => console.log(err))
 
     }
 
@@ -181,36 +207,38 @@ function Project() {
                             </button>
 
                             <div className={styles.project_info}>
-                                {showServiceForm && <ServiceForm
-                                    handleSubmit={createService}
-                                    btnText='Adicionar serviço'
-                                    projectData={project}
-                                />}
+                                {showServiceForm && (
+                                    <ServiceForm
+                                        handleSubmit={createService}
+                                        btnText='Adicionar serviço'
+                                        projectData={project}
+                                    />
+                                )}
                             </div>
                         </div>
 
                         <h2>Serviço</h2>
                         <Container customClass='start'>
-                        
-                        {services.lenghs>0 &&
-                        services.map((service)=>(
 
-                       <ServiceCard
-                       
-                       id={service.id}
-                       name={service.name}
-                       cost={service.cost}
-                       description={service.description}
-                       key={service.id}
-                       handleRemove={removeService}
-                       
-                       />
-            
-                        
-                        
-                        ))
-                        }
-                        {services.length === 0 && <p>Não há serviços cadastrados</p>}
+                            {services.lenghs > 0 &&
+                                services.map((service) => (
+
+                                    <ServiceCard
+
+                                        id={service.id}
+                                        name={service.name}
+                                        cost={service.cost}
+                                        description={service.description}
+                                        key={service.id}
+                                        handleRemove={removeService}
+
+                                    />
+
+
+
+                                ))
+                            }
+                            {services.length === 0 && <p>Não há serviços cadastrados</p>}
 
                         </Container>
                     </Container>
